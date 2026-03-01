@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Elusion VPN</title>
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <script>
+        const tgInit = window.Telegram.WebApp;
+        tgInit.expand(); // Раскрываем на 100% высоты
+        // Красим шапку Телеграма в черный, чтобы не было белой полосы
+        tgInit.setHeaderColor('#010101'); 
+        tgInit.setBackgroundColor('#010101');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css?v=real_data_fix">
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+
+    <div class="fixed-background"></div>
+
+    <div class="App">
+        <div class="HomePage">
+            
+            <div class="HomePage__top">
+                <div class="HomePage__logo">
+                    <svg viewBox="0 0 323 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M29.8667 65.2676L144.367 112.914C155.397 117.565 167.869 117.565 178.904 112.914L293.405 65.2676" stroke="white" stroke-width="43.0936" stroke-miterlimit="10" stroke-linecap="round"></path>
+                        <mask id="mask0_302_733" maskUnits="userSpaceOnUse" x="8" y="43" width="307" height="95"><path d="M29.8667 65.2676L144.367 112.914C155.397 117.565 167.869 117.565 178.904 112.914L293.405 65.2676" stroke="white" stroke-width="43.0936" stroke-miterlimit="10" stroke-linecap="round"></path></mask>
+                        <g mask="url(#mask0_302_733)"><g filter="url(#filter0_f_302_733)"><circle cx="336.673" cy="65.2679" r="74.7347" fill="#302727"></circle></g><g filter="url(#filter1_f_302_733)"><circle cx="-17.3342" cy="65.2679" r="74.7347" fill="#302727"></circle></g></g>
+                        <path d="M163.603 368.14C122.941 368.14 22 264.083 22 212.591V72.3812C22 65.4211 26.6786 59.3182 33.4203 57.4798L163.603 22" stroke="white" stroke-width="43.0936" stroke-miterlimit="10" stroke-linecap="round"></path>
+                        <path d="M163.603 368.14C203.134 368.14 301.272 264.083 301.272 212.591V72.3812C301.272 65.4211 296.723 59.3182 290.169 57.4798L163.603 22" stroke="white" stroke-width="43.0936" stroke-miterlimit="10" stroke-linecap="round"></path>
+                        <defs><filter id="filter0_f_302_733" x="169.595" y="-101.81" width="334.156" height="334.156" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="46.1717" result="effect1_foregroundBlur_302_733"></feGaussianBlur></filter><filter id="filter1_f_302_733" x="-184.412" y="-101.81" width="334.156" height="334.156" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="46.1717" result="effect1_foregroundBlur_302_733"></feGaussianBlur></filter></defs>
+                    </svg>
+                </div>
+                <div class="RingAnimation">
+                    <div></div><div></div><div></div><div></div><div></div>
+                </div>
+            </div>
+
+            <div class="HomePage__bottom">
+                <div class="HomePageBottom">
+                    
+                    <div class="HomePageBottom__head">
+                        <div class="HomePageBottom__headRow">
+                            <div id="header-title" class="header-brand-text">Elusion VPN</div>
+                            
+                            <div class="text-right text-lg leading-4">
+                                <span class="text-default font-light">до</span>&nbsp;<span id="date-text-val">...</span>
+                            </div>
+                        </div>
+                        <div class="HomePageBottom__headRow">
+                            <div class="text-default">offline</div>
+                            <div class="text-default" id="status-text">Загрузка...</div>
+                        </div>
+                    </div>
+
+                    <div class="HomePageBottom__body">
+                        
+                        <button class="Button bg-primary" id="main-btn" onclick="openOrder()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 5 3-3"></path><path d="m2 22 3-3"></path><path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z"></path><path d="M7.5 13.5 10 11"></path><path d="M10.5 16.5 13 14"></path><path d="m12 6 6 6 2.3-2.3a2.4 2.4 0 0 0 0-3.4l-2.6-2.6a2.4 2.4 0 0 0-3.4 0Z"></path></svg>
+                            <span class="mr-auto" id="btn-label">Купить подписку</span>
+                            <span id="btn-price">от 150&nbsp;₽</span>
+                        </button>
+                        
+                        <div style="margin-top: 10px;">
+                            <button class="Button Button--lighted" id="btn-setup" onclick="openSetup()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                <span class="mr-auto truncate">Установка и настройка</span>
+                                <div class="device-badge">
+                                    <span id="device-text">Device</span>
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <div class="HomePageBottom__row">
+                            <button class="Button Button--lighted-side" onclick="openProfile()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                <span class="mr-auto">Профиль</span>
+                            </button>
+                            <button class="Button Button--lighted-side" id="btn-support" onclick="openSupport()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path></svg>
+                                <span class="mr-auto">Поддержка</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

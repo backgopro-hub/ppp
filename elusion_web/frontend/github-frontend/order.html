@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Покупка подписки</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00A36C',
+                        'primary-dark-900': 'rgba(0, 20, 15, 0.8)',
+                        'primary-20': 'rgba(0, 214, 143, 0.2)',
+                        'primary-50': 'rgba(0, 214, 143, 0.5)',
+                        'default': '#9ca3af',
+                        'default-light': '#b0b7bf',
+                        'dark-70': '#000000B2',
+                    },
+                    spacing: {
+                        '54': '54px',
+                    },
+                    borderRadius: {
+                        'medium': '14px',
+                        'large': '24px'
+                    }
+                }
+            }
+        }
+        
+        /* 
+         * Custom Gradient Utilities for Plan Cards
+         * ==========================================
+         * Plan card gradients are defined in styles.css using the .OrderPage__button class
+         * 
+         * Default gradient: linear-gradient(135deg, rgba(0, 214, 143, 0.1) 0%, rgba(0, 20, 15, 0.8) 100%)
+         * Selected gradient: linear-gradient(135deg, rgba(0, 214, 143, 0.15) 0%, rgba(0, 20, 15, 0.9) 100%)
+         * 
+         * These gradients create a subtle green-to-dark effect at 135 degrees (diagonal)
+         * The selected state uses slightly higher opacity values for emphasis
+         */
+    </script>
+    <style>
+        body {
+            font-family: 'Onest', sans-serif;
+            background: url('bg.png') no-repeat center center fixed, #010101;
+            background-size: cover;
+        }
+
+        .OrderPage__buttonChip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 91.91px;
+            height: 19px;
+            border-radius: 8px;
+            font-size: 10px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body class="ultima">
+    <div class="App max-w-[500px] mx-auto p-4">
+        <div class="OrderPage rounded-2xl">
+            <h1 class="text-lg text-white font-semibold">
+                <span class="mr-4">Покупка подписки</span>
+            </h1>
+
+            <!-- Блок устройств -->
+            <div class="OrderPage__devicesBlock border-1 border-primary/30 bg-primary-dark-900/30 p-4 flex flex-col rounded-[16px] gap-2 text-sm mt-4" style="width: 331px; height: 138px; position: relative;">
+                <!-- Бейдж выгоды -->
+                <div class="OrderPage__devicesBlockDiscount" id="discount-badge" style="opacity: 0; position: absolute; top: 12px; right: 12px; background: #EE3F2D; color: white; padding: 5px 10px 4px; border-radius: 8px; font-size: 10px; font-weight: 600; transition: opacity 0.3s ease; width: 86.71px; height: 20px; display: flex; align-items: center; justify-content: center;">
+                    ВЫГОДА 50%
+                </div>
+                
+                <div class="flex gap-3 items-center">
+                    <div class="text-[#96ffdc] bg-white/5 w-[52px] h-[52px] flex items-center justify-center rounded-xl text-[32px] leading-7 shrink-0" id="device-count">
+                        1
+                    </div>
+                    <div class="flex flex-col gap-1 w-full">
+                        <div class="flex gap-2">
+                            <span class="text-[18px] w-[100px] text-white">Устройство</span>
+                        </div>
+                        <span class="text-sm text-default">Одновременно в подписке</span>
+                    </div>
+                </div>
+
+                <!-- Слайдер -->
+                <div class="flex flex-col w-full gap-1 mt-2 mb-0">
+                    <div class="relative flex gap-2 items-center">
+                        <div class="flex w-full relative rounded-full border-x-transparent h-7 border-x-[14px] border-s-primary bg-primary-20" id="track" style="position: relative; touch-action: none;">
+                            <div class="h-full absolute bg-primary" id="fill" style="left: 0%; width: 0%;"></div>
+                            
+                            <!-- Точки -->
+                            <div class="slider-dot absolute rounded-full w-2 h-2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-50" style="left: 0%;"></div>
+                            <div class="slider-dot absolute rounded-full w-2 h-2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-50" style="left: 25%;"></div>
+                            <div class="slider-dot absolute rounded-full w-2 h-2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-50" style="left: 50%;"></div>
+                            <div class="slider-dot absolute rounded-full w-2 h-2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-50" style="left: 75%;"></div>
+                            <div class="slider-dot absolute rounded-full w-2 h-2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-50" style="left: 100%;"></div>
+                            
+                            <!-- Ползунок -->
+                            <div class="group p-1 top-1/2 bg-primary rounded-full cursor-pointer" id="thumb" style="position: absolute; left: 0%; transform: translate(-50%, -50%); touch-action: none;">
+                                <span class="bg-dark-70 transition-transform rounded-full w-5 h-5 block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопки тарифов -->
+            <div class="OrderPage__buttons grid grid-cols-2 gap-3 mt-4">
+                <!-- 1 месяц -->
+                <button class="Button OrderPage__button flex flex-col justify-start gap-0 px-5 py-5 border-1 bg-primary-dark-900 border-primary/30 rounded-medium transition-transform active:scale-[0.97]" onclick="selectPlan(0)">
+                    <p class="text-sm text-white">1 месяц</p>
+                    <p class="font-medium text-2xl text-white" style="margin-top: auto;">199&nbsp;₽</p>
+                </button>
+
+                <!-- 3 месяца -->
+                <button class="Button OrderPage__button flex flex-col justify-start gap-0 px-5 py-5 border-1 bg-primary-dark-900 border-primary/30 rounded-medium transition-transform active:scale-[0.97]" onclick="selectPlan(1)">
+                    <p class="text-sm text-white">3 месяца</p>
+                    <p class="font-medium text-2xl text-white" style="margin-top: auto;">499&nbsp;₽</p>
+                    <p class="transition duration-300 text-default text-sm">166₽&nbsp;в месяц</p>
+                </button>
+
+                <!-- 6 месяцев (выбрано) -->
+                <button class="Button OrderPage__button OrderPage__button--selected flex flex-col justify-start items-center gap-0 px-5 py-5 border-1 bg-primary-dark-900 border-primary/90 rounded-medium transition-transform active:scale-[0.97]" onclick="selectPlan(2)">
+                    <p class="text-sm text-white" style="margin: 0;">6 месяцев</p>
+                    <div class="OrderPage__buttonChip bg-primary/20 text-white/90" style="margin-top: 8px;">ПОПУЛЯРНЫЙ</div>
+                    <p class="font-medium text-2xl text-white" style="margin-top: auto;">949&nbsp;₽</p>
+                    <p class="transition duration-300 text-default-light text-sm">158₽&nbsp;в месяц</p>
+                </button>
+
+                <!-- 1 год -->
+                <button class="Button OrderPage__button flex flex-col justify-start gap-0 px-5 py-5 border-1 bg-primary-dark-900 border-primary/30 rounded-medium transition-transform active:scale-[0.97]" onclick="selectPlan(3)">
+                    <p class="text-sm text-white">1 год</p>
+                    <p class="font-medium text-2xl text-white" style="margin-top: auto;">1699&nbsp;₽</p>
+                    <p class="transition duration-300 text-default text-sm">141₽&nbsp;в месяц</p>
+                </button>
+            </div>
+
+            <!-- Кнопка оплаты -->
+            <button class="Button OrderPage__buyButton inline-flex items-center justify-center gap-2 shrink-0 text-white mt-4 text-[16px] h-54 w-full rounded-medium transition-transform active:scale-[0.97]" style="background: linear-gradient(135deg, rgba(0, 214, 143, 0.2) 0%, rgba(0, 20, 15, 0.9) 100%); border: 1px solid rgba(0, 214, 143, 0.5);" onclick="buySubscription()">
+                <span id="buy-text">Оплатить 949&nbsp;₽</span>
+                <span class="text-sm line-through text-default" id="old-price" style="opacity: 0.6;">1194&nbsp;₽</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.BackButton.show();
+        tg.BackButton.onClick(() => { 
+            window.location.href = 'lochi.html' + window.location.search; 
+        });
+
+        let devices = 1;
+        let selectedPlan = 2;
+
+        const plans = [
+            { period: '1 месяц', price: 199, old: null },
+            { period: '3 месяца', price: 499, old: null },
+            { period: '6 месяцев', price: 949, old: 1194 },
+            { period: '1 год', price: 1699, old: null }
+        ];
+
+        // Слайдер
+        const thumb = document.getElementById('thumb');
+        const fill = document.getElementById('fill');
+        const track = document.getElementById('track');
+        const deviceCount = document.getElementById('device-count');
+        const dots = document.querySelectorAll('.slider-dot');
+        let isDragging = false;
+
+        function updateSlider(value) {
+            devices = Math.max(1, Math.min(5, value));
+            const percent = (devices - 1) * 25;
+            
+            thumb.style.left = percent + '%';
+            fill.style.width = percent + '%';
+            deviceCount.textContent = devices;
+            
+            // Обновляем цвет точек
+            dots.forEach((dot, index) => {
+                const dotPercent = index * 25;
+                if (dotPercent <= percent) {
+                    dot.style.background = 'rgba(0, 0, 0, 0.5)'; // Тёмные внутри заполненной области
+                } else {
+                    dot.style.background = 'rgba(0, 214, 143, 0.5)'; // Зелёные вне заполненной области
+                }
+            });
+            
+            // Показываем/скрываем бейдж выгоды
+            const discountBadge = document.getElementById('discount-badge');
+            if (devices > 1) {
+                // Рассчитываем скидку: 10% за каждое дополнительное устройство, максимум 50%
+                const discountPercent = Math.min((devices - 1) * 10, 50);
+                discountBadge.textContent = `Выгода ${discountPercent}%`;
+                discountBadge.style.opacity = '1';
+            } else {
+                discountBadge.style.opacity = '0';
+            }
+        }
+
+
+
+        thumb.addEventListener('mousedown', () => isDragging = true);
+        thumb.addEventListener('touchstart', () => isDragging = true);
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const rect = track.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            updateSlider(Math.round(percent / 25) + 1);
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const rect = track.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            updateSlider(Math.round(percent / 25) + 1);
+        });
+
+        document.addEventListener('mouseup', () => isDragging = false);
+        document.addEventListener('touchend', () => isDragging = false);
+
+        // Выбор тарифа
+        function selectPlan(index) {
+            selectedPlan = index;
+            tg.HapticFeedback.impactOccurred('light');
+            
+            document.querySelectorAll('.OrderPage__button').forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('OrderPage__button--selected', 'border-primary/90');
+                    btn.classList.remove('border-primary/30');
+                } else {
+                    btn.classList.remove('OrderPage__button--selected', 'border-primary/90');
+                    btn.classList.add('border-primary/30');
+                }
+            });
+            
+            updateBuyButton();
+        }
+
+        function updateBuyButton() {
+            const plan = plans[selectedPlan];
+            document.getElementById('buy-text').textContent = `Оплатить ${plan.price}\u00A0₽`;
+            const oldPrice = document.getElementById('old-price');
+            if (plan.old) {
+                oldPrice.textContent = `${plan.old}\u00A0₽`;
+                oldPrice.style.display = 'inline';
+            } else {
+                oldPrice.style.display = 'none';
+            }
+        }
+
+        function buySubscription() {
+            tg.HapticFeedback.notificationOccurred('success');
+            const plan = plans[selectedPlan];
+            tg.showAlert(`Оплата ${plan.price}₽ за ${plan.period} (${devices} устройств)`);
+        }
+
+        updateSlider(1);
+        updateBuyButton();
+    </script>
+</body>
+</html>
